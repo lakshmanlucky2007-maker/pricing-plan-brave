@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Design Pricing Plans</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --ink-muted: #666;
+    --ink-faint: #999;
+    --surface: #fafaf8;
+    --white: #ffffff;
+    --accent: #1a6b4a;
+    --accent-light: #e8f5ef;
+    --accent-mid: #2d9e6f;
+    --gold: #b8860b;
+    --gold-light: #fdf6e3;
+    --border: #e5e3dc;
+    --border-dark: #d0cdc3;
+    --shadow: 0 2px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 48px rgba(0,0,0,0.12);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  .header {
+    text-align: center;
+    padding: 72px 24px 48px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--border-dark));
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 17px;
+    color: var(--ink-muted);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    font-weight: 300;
+  }
+
+  .toggle-wrap {
+    display: inline-flex;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 4px;
+    gap: 4px;
+    box-shadow: var(--shadow);
+  }
+
+  .toggle-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .toggle-btn.active {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .save-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    margin-left: 4px;
+  }
+
+  /* ─── PLANS GRID ─────────────────────────────── */
+  .plans-section {
+    padding: 0 24px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--white);
+  }
+
+  .plan {
+    padding: 40px 32px;
+    position: relative;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .plan:last-child { border-right: none; }
+
+  .plan.featured {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .plan-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .plan:not(.featured) .plan-badge {
+    background: var(--surface);
+    color: var(--ink-muted);
+    border: 1px solid var(--border);
+  }
+
+  .plan.featured .plan-badge {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .plan-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .plan.featured .plan-name { color: var(--white); }
+
+  .plan-tagline {
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-bottom: 28px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .plan.featured .plan-tagline { color: rgba(255,255,255,0.55); }
+
+  .plan-price {
+    margin-bottom: 6px;
+  }
+
+  .price-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .plan.featured .price-label { color: rgba(255,255,255,0.45); }
+
+  .price-amount {
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .plan.featured .price-amount { color: var(--white); }
+
+  .price-period {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-left: 4px;
+  }
+
+  .plan.featured .price-period { color: rgba(255,255,255,0.5); }
+
+  .price-monthly {
+    font-size: 12px;
+    color: var(--accent-mid);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .plan.featured .price-monthly { color: #6ee7b7; }
+
+  .price-monthly.yearly { display: none; }
+
+  .divider-line {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  .plan.featured .divider-line { border-color: rgba(255,255,255,0.12); }
+
+  .features-list {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    padding: 6px 0;
+    color: var(--ink-muted);
+    line-height: 1.45;
+  }
+
+  .plan.featured .features-list li { color: rgba(255,255,255,0.7); }
+
+  .features-list li.included { color: var(--ink); }
+  .plan.featured .features-list li.included { color: var(--white); }
+
+  .features-list li.not-included { opacity: 0.4; text-decoration: line-through; }
+
+  .check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-top: 1px;
+  }
+
+  .check.yes {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .plan.featured .check.yes {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .check.no {
+    background: var(--surface);
+    color: var(--border-dark);
+    border: 1px solid var(--border);
+  }
+
+  .plan.featured .check.no {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .cta-btn {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+  }
+
+  .plan:not(.featured) .cta-btn {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1.5px solid var(--border-dark);
+  }
+
+  .plan:not(.featured) .cta-btn:hover {
+    background: var(--ink);
+    color: var(--white);
+    border-color: var(--ink);
+  }
+
+  .plan.featured .cta-btn {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 4px 20px rgba(26,107,74,0.35);
+  }
+
+  .plan.featured .cta-btn:hover {
+    background: #155c3e;
+    transform: translateY(-1px);
+  }
+
+  /* ─── COMPARE TABLE ──────────────────────────── */
+  .compare-section {
+    padding: 0 24px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .section-header p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .compare-table thead th {
+    padding: 20px 24px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 13px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-table thead th:first-child {
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  .compare-table thead th:not(:first-child) {
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .compare-table thead th.featured-col {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .compare-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table tbody tr:hover { background: #fafaf7; }
+
+  .compare-table tbody td {
+    padding: 14px 24px;
+    font-size: 13.5px;
+    vertical-align: middle;
+  }
+
+  .compare-table tbody td:first-child {
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  .compare-table tbody td:not(:first-child) {
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .compare-table tbody td.featured-col {
+    background: rgba(13,13,13,0.02);
+  }
+
+  .category-row td {
+    background: var(--surface) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--accent) !important;
+    padding: 10px 24px !important;
+    border-top: 1px solid var(--border);
+  }
+
+  .tick { color: var(--accent); font-size: 16px; }
+  .cross { color: #ccc; font-size: 16px; }
+  .partial { color: var(--gold); font-size: 13px; font-weight: 600; }
+
+  /* ─── RETAINER SECTION ───────────────────────── */
+  .retainer-section {
+    padding: 0 24px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .retainer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .retainer-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+
+  .retainer-card:hover { box-shadow: var(--shadow); }
+
+  .retainer-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .retainer-body h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .retainer-body p {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* ─── FAQ STRIP ──────────────────────────────── */
+  .faq-section {
+    background: var(--ink);
+    padding: 64px 24px;
+    margin-top: 16px;
+  }
+
+  .faq-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq-inner h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 18px 0;
+  }
+
+  .faq-q {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .faq-q::before {
+    content: 'Q';
+    width: 22px;
+    height: 22px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .faq-a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+    padding-left: 32px;
+    font-weight: 300;
+  }
+
+  /* ─── FOOTER CTA ─────────────────────────────── */
+  .footer-cta {
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  .footer-cta h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .footer-cta p {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .footer-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: #222; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1.5px solid var(--border-dark);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  /* ─── YEARLY PRICES (hidden by default) ─────── */
+  .price-yearly { display: none; }
+  .price-monthly-val { display: block; }
+  body.yearly .price-yearly { display: block; }
+  body.yearly .price-monthly-val { display: none; }
+  body.yearly .price-monthly.yearly { display: block; }
+  body.yearly .price-monthly.monthly { display: none; }
+
+  /* ─── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .plan { animation: fadeUp 0.5s ease both; }
+  .plan:nth-child(1) { animation-delay: 0.05s; }
+  .plan:nth-child(2) { animation-delay: 0.15s; }
+  .plan:nth-child(3) { animation-delay: 0.25s; }
+
+  /* ─── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 800px) {
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan { border-right: none; border-bottom: 1px solid var(--border); }
+    .plan:last-child { border-bottom: none; }
+    .retainer-grid { grid-template-columns: 1fr; }
+    .compare-table { font-size: 12px; }
+    .compare-table tbody td, .compare-table thead th { padding: 10px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ──────────────────────────────────── -->
+<div class="header">
+  <div class="eyebrow">Web Design Services</div>
+  <h1>Simple, <em>honest</em> pricing<br>for every business</h1>
+  <p class="header-sub">One-time setup. Monthly support. No surprises, no hidden fees.</p>
+
+  <div class="toggle-wrap">
+    <button class="toggle-btn active" onclick="setMode('monthly', this)">One-time</button>
+    <button class="toggle-btn" onclick="setMode('yearly', this)">Annual Bundle <span class="save-badge">Save 15%</span></button>
+  </div>
+</div>
+
+<!-- ─── PLANS ────────────────────────────────────── -->
+<div class="plans-section">
+  <div class="plans-grid">
+
+    <!-- STARTER -->
+    <div class="plan">
+      <div class="plan-badge">🌱 Starter</div>
+      <div class="plan-name">Basic</div>
+      <div class="plan-tagline">Perfect for new businesses just establishing their online presence.</div>
+      <div class="plan-price">
+        <div class="price-label">One-time setup</div>
+        <div>
+          <span class="price-amount price-monthly-val">₹18,000</span>
+          <span class="price-amount price-yearly">₹15,300</span>
+        </div>
+        <div class="price-monthly monthly">+ ₹1,500/month maintenance</div>
+        <div class="price-monthly yearly" style="display:none;">+ ₹1,275/month maintenance</div>
+      </div>
+      <hr class="divider-line">
+      <ul class="features-list">
+        <li class="included"><span class="check yes">✓</span> 3–4 page website</li>
+        <li class="included"><span class="check yes">✓</span> Mobile responsive design</li>
+        <li class="included"><span class="check yes">✓</span> WhatsApp call-to-action button</li>
+        <li class="included"><span class="check yes">✓</span> Contact form with email alerts</li>
+        <li class="included"><span class="check yes">✓</span> Google Maps embed</li>
+        <li class="included"><span class="check yes">✓</span> Hosting & domain setup guidance</li>
+        <li class="not-included"><span class="check no">✗</span> SEO optimization</li>
+        <li class="not-included"><span class="check no">✗</span> Google Business profile</li>
+        <li class="not-included"><span class="check no">✗</span> Online booking system</li>
+        <li class="not-included"><span class="check no">✗</span> Photo / portfolio gallery</li>
+        <li class="not-included"><span class="check no">✗</span> Google Analytics setup</li>
+      </ul>
+      <button class="cta-btn" onclick="whatsapp('Basic plan')">Get Started →</button>
+    </div>
+
+    <!-- STANDARD (FEATURED) -->
+    <div class="plan featured">
+      <div class="plan-badge">⭐ Most Popular</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-tagline">Everything most local businesses need to win online — and then some.</div>
+      <div class="plan-price">
+        <div class="price-label">One-time setup</div>
+        <div>
+          <span class="price-amount price-monthly-val">₹30,000</span>
+          <span class="price-amount price-yearly">₹25,500</span>
+        </div>
+        <div class="price-monthly monthly">+ ₹2,500/month maintenance</div>
+        <div class="price-monthly yearly" style="display:none;">+ ₹2,125/month maintenance</div>
+      </div>
+      <hr class="divider-line">
+      <ul class="features-list">
+        <li class="included"><span class="check yes">✓</span> 5–7 page website</li>
+        <li class="included"><span class="check yes">✓</span> Mobile responsive design</li>
+        <li class="included"><span class="check yes">✓</span> WhatsApp + call buttons</li>
+        <li class="included"><span class="check yes">✓</span> Contact form with email alerts</li>
+        <li class="included"><span class="check yes">✓</span> Google Maps + directions</li>
+        <li class="included"><span class="check yes">✓</span> Hosting & domain setup</li>
+        <li class="included"><span class="check yes">✓</span> Full on-page SEO setup</li>
+        <li class="included"><span class="check yes">✓</span> Google Business profile setup</li>
+        <li class="included"><span class="check yes">✓</span> Photo / portfolio gallery</li>
+        <li class="included"><span class="check yes">✓</span> Online appointment booking system</li>
+        <li class="included"><span class="check yes">✓</span> Google Analytics setup</li>
+        <li class="not-included"><span class="check no">✗</span> Advanced SEO + keyword research</li>
+        <li class="not-included"><span class="check no">✗</span> Social media integration</li>
+      </ul>
+      <button class="cta-btn" onclick="whatsapp('Standard plan')">Get Started →</button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="plan">
+      <div class="plan-badge">🏆 Premium</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-tagline">Full-stack web presence for serious businesses ready to dominate locally.</div>
+      <div class="plan-price">
+        <div class="price-label">One-time setup</div>
+        <div>
+          <span class="price-amount price-monthly-val">₹55,000</span>
+          <span class="price-amount price-yearly">₹46,750</span>
+        </div>
+        <div class="price-monthly monthly">+ ₹4,000/month maintenance</div>
+        <div class="price-monthly yearly" style="display:none;">+ ₹3,400/month maintenance</div>
+      </div>
+      <hr class="divider-line">
+      <ul class="features-list">
+        <li class="included"><span class="check yes">✓</span> 10–15 page website</li>
+        <li class="included"><span class="check yes">✓</span> Mobile responsive design</li>
+        <li class="included"><span class="check yes">✓</span> WhatsApp + call + live chat</li>
+        <li class="included"><span class="check yes">✓</span> Contact form with email alerts</li>
+        <li class="included"><span class="check yes">✓</span> Google Maps + directions</li>
+        <li class="included"><span class="check yes">✓</span> Hosting & domain setup</li>
+        <li class="included"><span class="check yes">✓</span> Advanced SEO + keyword research</li>
+        <li class="included"><span class="check yes">✓</span> Google Business profile + optimization</li>
+        <li class="included"><span class="check yes">✓</span> Photo / portfolio gallery</li>
+        <li class="included"><span class="check yes">✓</span> Online booking + payment integration</li>
+        <li class="included"><span class="check yes">✓</span> Social media feed integration</li>
+        <li class="included"><span class="check yes">✓</span> WhatsApp enquiry automation</li>
+        <li class="included"><span class="check yes">✓</span> Speed & Core Web Vitals optimization</li>
+        <li class="included"><span class="check yes">✓</span> Priority support + monthly strategy call</li>
+      </ul>
+      <button class="cta-btn" onclick="whatsapp('Pro plan')">Get Started →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── COMPARE TABLE ────────────────────────────── -->
+<div class="compare-section">
+  <div class="section-header">
+    <h2>Compare every feature</h2>
+    <p>See exactly what you get with each plan</p>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Basic</th>
+        <th class="featured-col">Standard ⭐</th>
+        <th>Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="category-row"><td colspan="4">Design & Pages</td></tr>
+      <tr><td>Number of pages</td><td>3–4</td><td class="featured-col">5–7</td><td>10–15</td></tr>
+      <tr><td>Mobile responsive</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Custom design (not a template)</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Photo / portfolio gallery</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Testimonials section</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Social media feed integration</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+
+      <tr class="category-row"><td colspan="4">Contact & Conversions</td></tr>
+      <tr><td>Contact form</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>WhatsApp button</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Click-to-call button</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Online booking system</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Payment integration (Razorpay/UPI)</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>WhatsApp enquiry automation</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Live chat widget</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+
+      <tr class="category-row"><td colspan="4">Local SEO & Visibility</td></tr>
+      <tr><td>Google Maps embed</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Basic on-page SEO</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Google Business profile setup</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Keyword research & targeting</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Google Business optimization</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+
+      <tr class="category-row"><td colspan="4">Technical Setup</td></tr>
+      <tr><td>Domain & hosting guidance</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>SSL certificate (HTTPS)</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Fast loading speed</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Google Analytics setup</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Core Web Vitals optimization</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+
+      <tr class="category-row"><td colspan="4">Monthly Maintenance</td></tr>
+      <tr><td>Content updates / month</td><td>2 updates</td><td class="featured-col">4 updates</td><td>Unlimited</td></tr>
+      <tr><td>Security & backups</td><td><span class="tick">✓</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Uptime monitoring</td><td><span class="cross">—</span></td><td class="featured-col"><span class="tick">✓</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Monthly analytics report</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Monthly strategy call</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+      <tr><td>Priority support (WhatsApp)</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="tick">✓</span></td></tr>
+
+      <tr class="category-row"><td colspan="4">Pricing</td></tr>
+      <tr><td>One-time setup fee</td><td><strong>₹18,000</strong></td><td class="featured-col"><strong>₹30,000</strong></td><td><strong>₹55,000</strong></td></tr>
+      <tr><td>Monthly maintenance</td><td>₹1,500/mo</td><td class="featured-col">₹2,500/mo</td><td>₹4,000/mo</td></tr>
+      <tr><td>Delivery time</td><td>5–7 days</td><td class="featured-col">7–10 days</td><td>12–18 days</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ─── RETAINER SECTION ─────────────────────────── -->
+<div class="retainer-section">
+  <div class="section-header">
+    <h2>What your monthly retainer covers</h2>
+    <p>We handle everything so you can focus on running your business</p>
+  </div>
+  <div class="retainer-grid">
+    <div class="retainer-card">
+      <div class="retainer-icon">✏️</div>
+      <div class="retainer-body">
+        <h3>Content Updates</h3>
+        <p>New offers, price changes, staff photos, new services — we update your site quickly. No waiting, no extra charges for standard updates.</p>
+      </div>
+    </div>
+    <div class="retainer-card">
+      <div class="retainer-icon">🛡️</div>
+      <div class="retainer-body">
+        <h3>Security & Backups</h3>
+        <p>Weekly backups of your entire site, security scans, and plugin/CMS updates. Your data is always safe and your site stays fast.</p>
+      </div>
+    </div>
+    <div class="retainer-card">
+      <div class="retainer-icon">📊</div>
+      <div class="retainer-body">
+        <h3>Performance Monitoring</h3>
+        <p>We monitor your site 24/7. If it goes down, we fix it before you even notice. Includes load speed checks and uptime reports.</p>
+      </div>
+    </div>
+    <div class="retainer-card">
+      <div class="retainer-icon">📈</div>
+      <div class="retainer-body">
+        <h3>Monthly Growth Report</h3>
+        <p>A simple 1-page report showing your visitors, top pages, and how many people contacted you. See your website working for you.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FAQ ──────────────────────────────────────── -->
+<div class="faq-section">
+  <div class="faq-inner">
+    <h2>Common questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What is the monthly maintenance for?</div>
+      <div class="faq-a">The monthly fee covers hosting management, security updates, backups, content changes, and technical support. Think of it like a building maintenance contract — your website stays safe, fast, and up-to-date without you lifting a finger.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do I need to buy hosting separately?</div>
+      <div class="faq-a">Yes — hosting and domain are paid directly by you (roughly ₹3,000–5,000/year). We guide you through everything and set it all up for you. This way the hosting is fully in your name and ownership.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I upgrade from Basic to Standard later?</div>
+      <div class="faq-a">Absolutely. You can upgrade anytime by paying the difference in the setup fee. All your existing content moves over — nothing is lost.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What if I want to stop the monthly plan?</div>
+      <div class="faq-a">No lock-in. Cancel anytime with 30 days' notice. Your website and all its files remain yours — we'll hand over everything cleanly.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How long does it take to build my website?</div>
+      <div class="faq-a">Basic: 5–7 days. Standard: 7–10 days. Pro: 12–18 days. Timeline starts after you provide your content (photos, text, logo). We'll guide you on exactly what we need.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER CTA ────────────────────────────────── -->
+<div class="footer-cta">
+  <h2>Ready to get your business<br>online the right way?</h2>
+  <p>WhatsApp us for a free consultation. No pressure, no commitment.</p>
+  <div class="footer-btns">
+    <a href="#" class="btn-primary" onclick="whatsapp('general enquiry')">💬 WhatsApp Us Now</a>
+    <a href="tel:+919999999999" class="btn-secondary">📞 Call Us</a>
+  </div>
+</div>
+
+<script>
+function setMode(mode, btn) {
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (mode === 'yearly') {
+    document.body.classList.add('yearly');
+  } else {
+    document.body.classList.remove('yearly');
+  }
+}
+
+function whatsapp(plan) {
+  const phone = '919999999999'; // Replace with your number
+  const msg = encodeURIComponent('Hi! I am interested in the ' + plan + '. Can you share more details?');
+  window.open('https://wa.me/' + phone + '?text=' + msg, '_blank');
+}
+</script>
+
+</body>
+</html>
